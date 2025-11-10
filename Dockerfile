@@ -22,5 +22,7 @@ COPY . .
 # Exponer puerto por convención
 EXPOSE 8000
 
-# Comando por defecto: Gunicorn con workers de Uvicorn. Ajusta main:app si tu app está en otro módulo.
-CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "main:app", "--bind", "0.0.0.0:8000", "--workers", "2"]
+# Comando por defecto: Gunicorn con workers de Uvicorn.
+# Usamos la forma shell para que Docker expanda la variable de entorno $PORT que Render provee.
+# Ajusta main:app si tu app está en otro módulo.
+CMD gunicorn -k uvicorn.workers.UvicornWorker main:app --bind 0.0.0.0:$PORT --workers 2
