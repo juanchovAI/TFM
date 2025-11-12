@@ -5,3 +5,5 @@ lightgbm
 joblib
 pandas
 gunicorn
+openpyxl
+python-multipart
