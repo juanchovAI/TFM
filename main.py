@@ -19,14 +19,18 @@ app = FastAPI(
 )
 
 # Allow CORS for any origin by default (adjust in production)
+origins = [
+    "https://tfm-ui2025.netlify.app",  # Tu dominio de frontend
+    "http://localhost:3000",           # Por si pruebas localmente
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["*"],               # Permite POST, GET, etc.
+    allow_headers=["*"],               # Permite todos los headers
 )
-
 # Configure logger
 logger = logging.getLogger("tfm_api")
 logger.setLevel(logging.INFO)
